@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const crypt = require("../my_modules/crypter");
 let counter = 0;
 
 function User(key, points) {
@@ -9,7 +10,7 @@ function User(key, points) {
 }
 
 let users = loadUsers();
-
+crypt.enCode("NilssonM");
 router.get("/", (req, res) => {
     let points;
 
@@ -29,7 +30,7 @@ router.get("/", (req, res) => {
     }
     saveUsers(users);
     res.json({ "points": points })
-
+    res.status(200).end
 })
 
 router.get("/pressButton", (req, res) => {
@@ -49,15 +50,15 @@ router.get("/pressButton", (req, res) => {
     let remains = [(500 - remain500), (100 - remain100), (10 - remain10)]
 
     if (remain500 === 0) {
-        console.log("jaollinen 10" + (counter % 500))
+        console.log("jaollinen 500 " + (counter % 500))
         users[userIndex].points += 250;
     }
     else if (remain100 === 0) {
-        console.log("jaollinen 10" + (counter % 100))
+        console.log("jaollinen 100 " + (counter % 100))
         users[userIndex].points += 40;
     }
     else if (remain10 === 0) {
-        console.log("jaollinen 10" + (counter % 10))
+        console.log("jaollinen 10 " + (counter % 10))
         users[userIndex].points += 5;
     }
 
@@ -66,6 +67,7 @@ router.get("/pressButton", (req, res) => {
         "points": users[userIndex].points,
         "countToNext": Math.min(...remains)
     })
+    res.status(200).end
 })
 
 function loadUsers() {
@@ -81,14 +83,6 @@ function saveUsers(users) {
     });
 }
 
-function makeid(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+
 
 module.exports = router;
