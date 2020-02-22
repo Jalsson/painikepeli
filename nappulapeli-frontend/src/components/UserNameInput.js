@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class UserNameInput extends Component{
-    constructor () {
+class UserNameInput extends Component {
+    constructor() {
         super()
         this.state = {
             userName: '',
@@ -11,8 +11,8 @@ class UserNameInput extends Component{
     }
 
 
-    sendUserName(){
-        fetch(window.location.href+"authentication/username", {
+    sendUserName() {
+        fetch(window.location.href + "authentication/username", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -21,52 +21,32 @@ class UserNameInput extends Component{
             body: JSON.stringify({
                 userName: this.state.userName
             })
-            })
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.status === "failure") {
                     prompt("failure");
                 }
-                else if(data.status === "success") {
+                else if (data.status === "success") {
                     window.location.reload();
                 }
-                else if (data.status === "wrongCharacters"){
+                else if (data.status === "wrongCharacters") {
                     prompt("wrongCharacters");
                 }
             })
     }
 
     handleChange(event) {
-        const {name, value} = event.target;
-        this.setState({[name]: value});
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     }
-
-       
-/**fetch(window.location.href+"authentication", {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            firstParam: 'yourValue',
-            secondParam: 'yourOtherValue',
-        })
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.setState({
-                number: data.points,
-                countToNext: data.countToNext
-            })
-        }) */
 
     render() {
         return (
             <div>
                 <h1>you have to insert your userName</h1>
-                    <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} placeholder="your name here "></input> 
-                    <button onClick={this.sendUserName}>submit</button>
+                <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} placeholder="your name here "></input>
+                <button onClick={this.sendUserName}>submit</button>
             </div>
         )
     }

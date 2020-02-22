@@ -5,8 +5,6 @@ const fm = require("../my_modules/fileManager")
 const User = require("../models/User")
 
 router.get("/", (req, res) => {
-
-
     let users = fm.loadFile("userFile.txt");
     let points = null;
     let username = null;
@@ -19,7 +17,7 @@ router.get("/", (req, res) => {
         points = users.find(x => x.key === req.cookies.userID).points
         username = crypt.deCode(req.cookies.userID)
     }
-    res.json({ 
+    res.json({
         "points": points,
         "username": username
     })
@@ -46,16 +44,16 @@ router.post("/username", (req, res) => {
         res.status(201).end;
         return;
     }
-    else{
+    else {
         res.cookie('userID', encodedName, { maxAge: (365 * 24 * 60 * 60 * 1000) });
         res.json({
             "status": "success",
         });
         console.log("setting new name")
         users.push(new User(encodedName, 20))
-        fm.saveFile("userFile.txt",users);
+        fm.saveFile("userFile.txt", users);
         res.status(201).end;
-        
+
     }
 })
 

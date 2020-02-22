@@ -12,6 +12,28 @@ router.get("/", (req, res) => {
 
 })
 
+router.get("/getPlayerInfo", (req, res) => {
+
+    let users = fm.loadFile("userFile.txt");
+    let points = null;
+    let username = null;
+
+    if (!users.find(x => x.key === req.cookies.userID)) {
+        username = null;
+        points = null;
+    }
+    else {
+        points = users.find(x => x.key === req.cookies.userID).points
+        username = crypt.deCode(req.cookies.userID)
+    }
+    res.json({
+        "points": points,
+        "username": username
+    })
+    res.status(201).end;
+
+})
+
 router.get("/pressButton", (req, res) => {
     let users = fm.loadFile("userFile.txt");
     let userIndex
@@ -29,15 +51,15 @@ router.get("/pressButton", (req, res) => {
     let remains = [(500 - remain500), (100 - remain100), (10 - remain10)]
 
     if (remain500 === 0) {
-        console.log("jaollinen 500 " + (counter % 500))
+        console.log("jaollinen 500 " + (counter % 500));
         users[userIndex].points += 250;
     }
     else if (remain100 === 0) {
-        console.log("jaollinen 100 " + (counter % 100))
+        console.log("jaollinen 100 " + (counter % 100));
         users[userIndex].points += 40;
     }
     else if (remain10 === 0) {
-        console.log("jaollinen 10 " + (counter % 10))
+        console.log("jaollinen 10 " + (counter % 10));
         users[userIndex].points += 5;
     }
 
