@@ -1,10 +1,14 @@
 const express = require('express')
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+
 // Create the server
 const app = express()
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 app.use("/number", require("./routes/number"));
+app.use("/authentication", require("./routes/authentication"));
 
 // Choose the port and start the server
 const PORT = process.env.PORT || 3005

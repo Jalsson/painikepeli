@@ -2,38 +2,18 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const crypt = require("../my_modules/crypter");
+const fm = require("../my_modules/fileManager")
 let counter = 0;
 
-function User(key, points) {
-    this.key = key;
-    this.points = points;
-}
 
-let users = loadUsers();
-crypt.enCode("NilssonM");
+
+
 router.get("/", (req, res) => {
-    let points;
 
-    if (!users.find(x => x.key === req.cookies.userID)) {
-        let userID = makeid(25);
-        while(users.find(x => x.key === userID)){
-            userID = makeid(25);
-        }
-
-        res.cookie('userID', userID, { maxAge: (365 * 24 * 60 * 60 * 1000) });
-
-        users.push(new User(userID, 20))
-        points = users.find(x => x.key === userID).points
-    }
-    else {
-        points = users.find(x => x.key === req.cookies.userID).points
-    }
-    saveUsers(users);
-    res.json({ "points": points })
-    res.status(200).end
 })
 
 router.get("/pressButton", (req, res) => {
+    let users = fm.loadFile("userFile.txt");
     let userIndex
     for (let i = 0; i < users.length; i++) {
         if (users[i].key === req.cookies.userID) {
@@ -42,7 +22,6 @@ router.get("/pressButton", (req, res) => {
             break;
         }
     }
-
     counter++;
     let remain500 = (counter % 500);
     let remain100 = (counter % 100);

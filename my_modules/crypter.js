@@ -38,15 +38,19 @@ module.exports = {
     enCode(string){
         const characters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','å','ä','ö','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Å','Ä','Ö'];
         
+        for (let i = 0; i < string.length; i++) {
+            if (characters.indexOf(string.charAt(i)) < 0) {
+                return null;
+            }
+        }
+
         let encodedKeys = loadKeys();
         let jumpNumber = 1;
         let encodedString = "";
         for (var i = 0; i < string.length; i++) {
-            console.log(characters.indexOf(string.charAt(i)) + 2)
-            jumpNumber = jumpNumber * (characters.indexOf(string.charAt(i)) + 2)
+            jumpNumber = jumpNumber * (characters.indexOf(string.charAt(i)) + 10)
         }
         jumpNumber = (jumpNumber % 58)+1;
-        console.log("jumpnumber "+jumpNumber);
         for (let i = 0; i < string.length; i++) {
             let tempJumpKey = jumpNumber
             if ((characters.indexOf(string.charAt(i)) + jumpNumber) >= 58) {
@@ -55,9 +59,6 @@ module.exports = {
             else{
                 tempJumpKey = (characters.indexOf(string.charAt(i)) + jumpNumber);
             }
-            console.log("temp namber "+jumpNumber)
-            console.log((characters.indexOf(string.charAt(i)) + jumpNumber));
-            console.log("temp jump Key "+tempJumpKey)
             encodedString += encodedKeys[tempJumpKey];
             
         }
@@ -65,8 +66,8 @@ module.exports = {
             jumpNumber = "0"+jumpNumber.toString();
         }
         encodedString = encodedString.concat(jumpNumber.toString());
-        console.log("encoded "+encodedString);
-        this.deCode(encodedString);
+        return encodedString;
+        
     },
 
     deCode(string){
@@ -83,26 +84,18 @@ module.exports = {
             name = name.substr(0, name.length -2);
             if ((key - jumpNumber) < 0) {
                 
-                console.log("jumpnumber "+jumpNumber)
-                console.log("key "+key)
-                console.log("tempkey "+ (-1*(jumpNumber - key)) )
                 tempJumpKey = 58 + (-1*(jumpNumber - key)) 
                 
                 if (jumpNumber == key) {
                     tempJumpKey = 0;
                 }
-                console.log(tempJumpKey)
             }
             else{
-                console.log("jumpnumber "+jumpNumber)
-                console.log("key "+key)
                 tempJumpKey = key - jumpNumber;
             }
             deCodedString = characters[tempJumpKey] + deCodedString;
-            console.log(tempJumpKey)
-            console.log(deCodedString)
         }
-        
+        return deCodedString;
     }
 
 }
