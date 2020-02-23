@@ -8,7 +8,7 @@ class ButtonGame extends Component{
             points: 0,
             countToNext: 0
         }
-        this.PressButton = this.PressButton.bind(this)
+        this.pressButton = this.pressButton.bind(this)
     }
 
 
@@ -17,7 +17,6 @@ class ButtonGame extends Component{
         fetch(window.location.href + "number/getPlayerInfo")
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({
                     points: data.points,
                     userName: data.username
@@ -25,7 +24,7 @@ class ButtonGame extends Component{
             })
     }
 
-    PressButton(params) {
+    pressButton(params) {
         fetch(window.location.href + "number/pressButton")
             .then(response => response.json())
             .then(data => {
@@ -41,7 +40,7 @@ class ButtonGame extends Component{
             <div>
                 <h1>Hello {this.state.userName}</h1>
                 <p>you have {this.state.points} points</p>
-                <button onClick={this.PressButton}>press it</button>
+                <button onClick={this.pressButton}>press it</button>
                 {this.state.countToNext > 0 && <p>next score is {this.state.countToNext} clicks away</p>}
             </div>
         )

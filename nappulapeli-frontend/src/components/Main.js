@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import UserNameInput from './UserNameInput';
+import WelcomeScreen from './WelcomeScreen';
 import ButtonGame from './ButtonGame';
+import Cookies from 'js-cookie';
 
 class Main extends Component {
     constructor() {
         super()
         this.state = {
-            userName: ""
+            userName: "",
+            page: "welcomeScreen"
         }
+        this.stateHandler = this.stateHandler.bind(this)
+    }
+
+    stateHandler(stateName, value) {
+        this.setState({
+            [stateName]: value
+        })
     }
 
     componentDidMount() {
+        console.log(window.location.origin);
         fetch(window.location.href + "authentication")
             .then(response => response.json())
             .then(data => {
@@ -21,13 +31,16 @@ class Main extends Component {
     }
 
     render() {
-        return (
-            <div>
-                {this.state.userName != null ? <ButtonGame/> :
-                    <UserNameInput />
-                }
-            </div>
-        )
+
+        if( (this.state.page === "game" || Cookies.get('noWelcome') === "false") && this.state.userName !== null){
+            return <ButtonGame />
+        }
+        else if (this.state.userName !== null && this.state.page === "game") {
+            return <ButtonGame />
+        }
+        else {
+            return <WelcomeScreen stateHandler={this.stateHandler} userName={this.state.userName} />
+        }
     }
 }
 

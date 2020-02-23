@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import Cookies from 'js-cookie';
 
-class UserNameInput extends Component {
+class NameInput extends Component {
     constructor() {
         super()
         this.state = {
             userName: '',
+            warning: ''
         }
         this.sendUserName = this.sendUserName.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -25,13 +27,14 @@ class UserNameInput extends Component {
             .then(response => response.json())
             .then(data => {
                 if (data.status === "failure") {
-                    prompt("failure");
+                    this.setState({warning: "That user name is already taken!"})
                 }
                 else if (data.status === "success") {
-                    window.location.reload();
+                   this.props.stateHandler("page","game")
+                   this.props.stateHandler("userName",this.state.userName)
                 }
                 else if (data.status === "wrongCharacters") {
-                    prompt("wrongCharacters");
+                    this.setState({warning: "Some of the character in your name were now allowed. Please enter only letters."})
                 }
             })
     }
@@ -43,13 +46,14 @@ class UserNameInput extends Component {
 
     render() {
         return (
-            <div>
-                <h1>you have to insert your userName</h1>
+            <div style={{marginTop: 50}}>
+                {Cookies.get('userID') != null ? <h3>It seems that your cookie is either expired or wrong kind. You have to make new user to enter</h3>: <h2>New user? Please enter your name below</h2>}
                 <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} placeholder="your name here "></input>
-                <button onClick={this.sendUserName}>submit</button>
+                <button className="nameInputButton" onClick={this.sendUserName}>Submit</button>
+                <p>{this.state.warning}</p>
             </div>
         )
     }
 }
 
-export default UserNameInput;
+export default NameInput;
