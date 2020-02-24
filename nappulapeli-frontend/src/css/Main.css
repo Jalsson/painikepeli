@@ -11,15 +11,21 @@ color: white;
   position: relative;
   text-align: center;
 }
+.bigger-text{
+  font-size: 250%;
+}
+
 .centered-text{
   position: absolute;
   top:40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 350%;
+  font-size: 170%;
   pointer-events: none;
 }
-
+.text-down{
+  transform: translate(-50%, -20%);
+}
 .game-button{
   max-width: 100%;
 }
@@ -29,14 +35,18 @@ color: white;
   padding: 0;
 }
 
-.sub-menu-selected{
-background-color: rgba(137, 113, 168, 0.85);
-border: solid;
-cursor:pointer;
+.selected-clor{
+  background-color: cornflowerblue;
+}
+ 
+.unselected-clor{
+box-shadow: 2px 10px rgb(8, 8, 8);
+background-color: rgb(46, 46, 153); 
 }
 
-.sub-menu-unselected{
-background-color: rgba(21, 0, 48, 0.699);
+
+.sub-menu-button{
+  color: white;
 border: solid;
 border-color: black;
 cursor:pointer;
@@ -67,7 +77,8 @@ cursor:pointer;
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   [class*="col"] {
-    max-height: 55px;
+    max-height: 40px;
+    font-size: 69%;
   }
   [class*="welcome-content-body"] {
   min-height: 400px;
@@ -75,9 +86,15 @@ cursor:pointer;
   [class*="row"] {
   max-width: 100%;
   }
+  [class*="bigger-text"] {
+    font-size: 170%;
+  }
   [class*="centered-text"] {
-    font-size: 7vw;
+    font-size: 5vw;
     min-width: 80%;
+  }
+  [class*="unselected-clor"] {
+    box-shadow: 1px 5px rgb(8, 8, 8);
     }
  h2{
   margin-top: 10px;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WelcomeScreen from './WelcomeScreen';
-import ButtonGame from './ButtonGame';
+import GameScreen from './GameScreen';
 import Cookies from 'js-cookie';
 
 class Main extends Component {
@@ -33,10 +33,10 @@ class Main extends Component {
     render() {
 
         if( (this.state.page === "game" || Cookies.get('noWelcome') === "false") && this.state.userName !== null){
-            return <ButtonGame />
+            return <GameScreen />
         }
         else if (this.state.userName !== null && this.state.page === "game") {
-            return <ButtonGame />
+            return <GameScreen />
         }
         else {
             return <WelcomeScreen stateHandler={this.stateHandler} userName={this.state.userName} />

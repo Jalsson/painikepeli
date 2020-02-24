@@ -26,8 +26,8 @@ class WelcomeScreen extends Component {
     }
 
     render() {
-        let selectedButton ='col sub-menu-selected'
-        let unSelectedButton = 'col sub-menu-unselected'
+        let selectedButton ='col sub-menu-button selected-clor'
+        let unSelectedButton = 'col sub-menu-button unselected-clor'
         if (this.props.userName != null) {
         return (
             <div className="welcome-content-body">
@@ -35,7 +35,7 @@ class WelcomeScreen extends Component {
                 
                 <h2>Here are the game rules for refresh :)</h2>
                 <GameInfo/>
-                <p>Press here to start playing 
+                <p>Press here to start playing
                 <button
                 style={{marginLeft:30}} 
                 onClick={() => {this.props.stateHandler("page","game"); 
