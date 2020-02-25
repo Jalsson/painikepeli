@@ -46,7 +46,7 @@ class NameInput extends Component {
 
     render() {
         return (
-            <div style={{marginTop: 50}}>
+            <div className="fade-in" style={{marginTop: 50}}>
                 {Cookies.get('userID') != null ? <h3>It seems that your cookie is either expired or wrong kind. You have to make new user to enter</h3>: <h2>New user? Please enter your name below</h2>}
                 <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} placeholder="your name here "></input>
                 <button className="nameInputButton" onClick={this.sendUserName}>Submit</button>

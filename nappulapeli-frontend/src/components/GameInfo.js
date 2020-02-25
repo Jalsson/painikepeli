@@ -1,9 +1,10 @@
 import React from 'react';
 
+
 function GameInfo() {
 
         return (
-            <div style={{backgroundColor: "rgb(61, 76, 151)",paddingTop: 10, paddingBottom: 10}}>
+            <div className="fade-in info-margin" style={{ backgroundColor: "rgb(61, 76, 151)",paddingTop: 10, paddingBottom: 10,color:"white"}}>
                 <p>You have 20 points and a button that you can press.
                  Each time you press that button, it will cost you one point and the buttons count will increase.
                 If your button press is one of the following you will be awarded followingly:</p>

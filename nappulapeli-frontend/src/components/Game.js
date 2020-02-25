@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import button from '../images/button.png';
 import buttonDown from '../images/button_down.png';
 
+
 class Game extends Component{
     constructor(){
         super()
@@ -30,10 +31,9 @@ class Game extends Component{
     }
 
     pressButton(params) {
-        let BressingTexts = ["Almoust there","Faster!!", "Getting closer", "Keep going!","Harder!","Stronger!"]
-        let buttonTexts = ["Daring today?","Im ready, you?","Leeroyyy!","Really pressing stuff","How's weather?","React is fun"]
+        let buttonTexts = ["Daring today?","Im ready, you?","Leeroyyy!","Really pressing stuff","How's weather?","React is fun","Almoust there","Faster!!", "Getting closer", "Keep going!","Harder!","Stronger!"]
         
-        this.setState({buttonStatus: "down", buttonPressingText: BressingTexts[Math.floor(Math.random() * BressingTexts.length)]})
+        this.setState({buttonStatus: "down", buttonPressingText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
         setTimeout(() => {
             this.setState({buttonStatus: "up",buttonText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
         fetch(window.location.href + "number/pressButton")
@@ -44,13 +44,13 @@ class Game extends Component{
                     countToNext: data.countToNext
                 })
             })
-        }, 500)
+        }, 250)
             
     }
 
     render() {
         return(
-            <div >
+            <div className="fade-in">
                 <h1 className="bigger-text">Lets play {this.state.userName}!</h1>
                 <h2 className="bigger-text" style={{color: "White"}}>Your points: <b>{this.state.points}</b></h2>
                 <div className="button-container">
@@ -59,13 +59,13 @@ class Game extends Component{
                         <img onClick={this.pressButton} src={button} className="game-button" alt="Button" /> 
                         <div className="centered-text">{this.state.countToNext > 0 ? 
                         <p>Next price awarded in {this.state.countToNext} clicks</p>: 
-                        <p style={{visibility: "hidden"}}>placeHolder</p>}
+                        <p >ready?</p>}
                         <h1>{this.state.buttonText}</h1></div> 
                     </div>:
                     <div>
                         <img src={buttonDown} className="game-button" alt="ButtonDown" />
                         <div className="centered-text text-down">
-                            <p>{this.state.buttonPressingText}</p>
+                        <p>Next price awarded in {this.state.countToNext} clicks</p>
                             <h1>{this.state.buttonText}</h1>
                         </div>
                     </div>}

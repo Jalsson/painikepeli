@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import button from '../images/button.png';
-import buttonDown from '../images/button_down.png';
 import Game from './Game'
+import Leaderboards from'./Leaderboards'
+import GameInfo from './GameInfo' 
 
 class GameScreen extends Component{
     constructor(){
@@ -35,20 +35,20 @@ class GameScreen extends Component{
         let unSelectedButton = 'col sub-menu-button unselected-clor'
         return(
             <div >
-                <div className="row">
+                <div className="row" >
                     <div
                     className={this.state.renderedPage === "game" ? selectedButton: unSelectedButton} 
-                    onClick={() => console.log("registaration was pressed")}>
+                    onClick={() => this.setPage("game")}>
                         <h2>Play</h2>
                     </div>
                     <div
                     className={this.state.renderedPage === "leaderboard" ? selectedButton: unSelectedButton} 
-                    onClick={() => console.log("info was pressed")}> <h2>Leaderboards</h2> </div>
+                    onClick={() => this.setPage("leaderboard")}> <h2>Leaderboards</h2> </div>
                      <div
                     className={this.state.renderedPage === "howTo" ? selectedButton: unSelectedButton} 
-                    onClick={() => console.log("info was pressed")}> <h2>How to play</h2> </div>
+                    onClick={() => this.setPage("howTo")}> <h2>How to play</h2> </div>
                 </div>
-                {this.state.renderedPage === "game" && <Game/>}{this.state.renderedPage === "leaderboard" && <h1>leaderboards</h1>} {this.state.renderedPage === "howTo" && <h1>How to play</h1>}
+                {this.state.renderedPage === "game" && <Game/>}{this.state.renderedPage === "leaderboard" && <Leaderboards/>} {this.state.renderedPage === "howTo" && <GameInfo></GameInfo>}
             </div>
         )
     }
