@@ -7,7 +7,7 @@ const app = express()
 app.use(cookieParser());
 app.use(bodyParser.json());
 
-app.use("/number", require("./routes/number"));
+app.use("/game", require("./routes/game"));
 app.use("/authentication", require("./routes/authentication"));
 
 // Choose the port and start the server

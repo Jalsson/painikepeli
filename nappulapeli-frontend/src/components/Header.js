@@ -1,10 +1,11 @@
 import React from 'react';
+import Logo from '../images/logo.png'
 
 
 function Header() {
   return (
     <div className="Header">
-      <h1 >nappulapeli</h1>
+       <img src={Logo} className="logo" alt="Logo" /> 
     </div>
   );
 }

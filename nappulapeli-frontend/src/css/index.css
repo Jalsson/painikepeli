@@ -8,6 +8,7 @@ body {
   background-image: url("../images/background_image.svg");
   background-size: 2560px;
   background-position: top;
+  background-color: #0F4B7C;
   text-align: center;
 }
 
@@ -15,3 +16,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

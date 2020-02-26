@@ -1,1 +1,1 @@
-[{"key":"Fyiu6CiuMOMOer01"},{"key":"By7UfIUfUfo7Yh47","points":-2}]
+[{"key":"By7UfIUfUfo7Yh47","points":12},{"key":"qGFvrMLcGriu41","points":9}]

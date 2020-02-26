@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import button from '../images/button.png';
-import buttonDown from '../images/button_down.png';
+import GameOver from './GameOver'
+import button from '../../images/button.png';
+import buttonDown from '../../images/button_down.png';
 
 
 class Game extends Component{
@@ -8,7 +9,7 @@ class Game extends Component{
         super()
         this.state = {
             userName: "",
-            points: 0,
+            points: null,
             countToNext: 0,
             buttonStatus: "up",
             buttonText: "Press me!",
@@ -16,11 +17,12 @@ class Game extends Component{
             renderedPage: "game"
         }
         this.pressButton = this.pressButton.bind(this)
+        this.resetPoints = this.resetPoints.bind(this)
     }
 
 
     componentDidMount() {
-        fetch(window.location.href + "number/getPlayerInfo")
+        fetch(window.location.href + "game/getPlayerInfo")
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -36,7 +38,7 @@ class Game extends Component{
         this.setState({buttonStatus: "down", buttonPressingText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
         setTimeout(() => {
             this.setState({buttonStatus: "up",buttonText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
-        fetch(window.location.href + "number/pressButton")
+        fetch(window.location.href + "game/pressButton")
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -48,11 +50,22 @@ class Game extends Component{
             
     }
 
+    resetPoints(params) {
+        fetch(window.location.href + "game/resetPoints")
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    points: data.points
+                })
+            })
+            
+    }
+
     render() {
         return(
             <div className="fade-in">
-                <h1 className="bigger-text">Lets play {this.state.userName}!</h1>
-                <h2 className="bigger-text" style={{color: "White"}}>Your points: <b>{this.state.points}</b></h2>
+                <h2 className="bigger-text" style={{color: "White",marginTop: 40}}>Your points: <b>{this.state.points}</b></h2>
+                {this.state.points <= 0 && this.state.points != null && <GameOver resetPoints={this.resetPoints}/>}
                 <div className="button-container">
                     {this.state.buttonStatus === "up" ? 
                     <div> 

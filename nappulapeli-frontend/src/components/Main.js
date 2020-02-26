@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import WelcomeScreen from './WelcomeScreen';
-import GameScreen from './GameScreen';
+import WelcomeScreen from './welcome_components/WelcomeScreen';
+import GameScreen from './game_components/GameScreen';
 import Cookies from 'js-cookie';
 
 class Main extends Component {

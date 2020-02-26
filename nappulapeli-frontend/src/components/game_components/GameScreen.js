@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game'
 import Leaderboards from'./Leaderboards'
-import GameInfo from './GameInfo' 
+import GameInfo from '../welcome_components/GameInfo' 
 
 class GameScreen extends Component{
     constructor(){
@@ -14,7 +14,7 @@ class GameScreen extends Component{
 
 
     componentDidMount() {
-        fetch(window.location.href + "number/getPlayerInfo")
+        fetch(window.location.href + "game/getPlayerInfo")
             .then(response => response.json())
             .then(data => {
                 this.setState({

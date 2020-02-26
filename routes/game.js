@@ -3,10 +3,8 @@ const router = express.Router();
 const fs = require("fs");
 const crypt = require("../my_modules/crypter");
 const fm = require("../my_modules/fileManager")
+const User = require("../models/User")
 let counter = 0;
-
-
-
 
 router.get("/", (req, res) => {
 
@@ -71,19 +69,43 @@ router.get("/pressButton", (req, res) => {
     res.status(200).end
 })
 
-function loadUsers() {
-    let rawdata = fs.readFileSync('userFile.txt');
-    let data = JSON.parse(rawdata);
-    return data;
+router.get("/resetPoints", (req, res) => {
+    let users = fm.loadFile("userFile.txt");
+    let userIndex
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].key === req.cookies.userID) {
+            userIndex = i;
+            users[userIndex].points = 20;
+            break;
+        }
+    }
 
-}
+    saveUsers(users);
+    res.json({
+        "points": users[userIndex].points
+    })
+    res.status(200).end
+})
+
+router.get("/leaderboard", (req, res) => {
+    let users = fm.loadFile("userFile.txt");
+    let decodedUsers = [];
+    for (let i = 0; i < 10; i++) {
+        if (users[i]) {
+            decodedUsers.push(new User(crypt.deCode(users[i].key), users[i].points))
+        }
+    }
+    
+    res.json({
+        "users": decodedUsers
+    })
+    res.status(200).end
+})
 
 function saveUsers(users) {
     fs.writeFile('userFile.txt', JSON.stringify(users), function (err) {
         if (err) throw err;
     });
 }
-
-
 
 module.exports = router;

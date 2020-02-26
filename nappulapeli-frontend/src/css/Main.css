@@ -7,6 +7,16 @@ margin: auto;
 color: white;
 }
 
+.lose-game-body{
+box-shadow: 10px 10px rgb(8, 8, 8);
+background-color: rgb(20, 0, 47);
+position: relative;
+left: -50%;
+z-index: 1;
+min-width: 604px;
+min-height: 400px;
+}
+
 .button-container{
   position: relative;
   text-align: center;
@@ -144,6 +154,10 @@ cursor:pointer;
     font-size: 5vw;
     min-width: 80%;
   }
+  [class*="lose-game-body"] {
+    min-width: 100vw;
+    min-height: 200px;
+  }
   [class*="info-margin"] {
     margin-top: 5px;
   }
@@ -154,7 +168,19 @@ cursor:pointer;
   margin-top: 10px;
  }
 }
+ol {
+  max-width: 600px;
+  padding: 20px;
+  margin: auto;
+}
 
+ol li {
+  background: #c3d6ffa8;
+  padding: 5px;
+  margin: 5px;
+  font-size: 130%;
+  border-radius: 2px;
+}
 
 input[type=text]{
   width: 40%;
