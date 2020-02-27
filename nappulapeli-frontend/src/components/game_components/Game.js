@@ -20,9 +20,9 @@ class Game extends Component{
         this.resetPoints = this.resetPoints.bind(this)
     }
 
-
+    // when we start the game we get our points from server
     componentDidMount() {
-        fetch(window.location.href + "game/getPlayerInfo")
+        fetch(window.location.href + "authentication")
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -32,10 +32,14 @@ class Game extends Component{
             })
     }
 
+    // Hadles all the pressing
     pressButton(params) {
+        //random words that button says everytime user presses it
         let buttonTexts = ["Daring today?","Im ready, you?","Leeroyyy!","Really pressing stuff","How's weather?","React is fun","Almoust there","Faster!!", "Getting closer", "Keep going!","Harder!","Stronger!"]
         
+        //shanges button status "down" so react can render different image
         this.setState({buttonStatus: "down", buttonPressingText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
+        //adding small delay after we bring the button button back up
         setTimeout(() => {
             this.setState({buttonStatus: "up",buttonText: buttonTexts[Math.floor(Math.random() * buttonTexts.length)]})
         fetch(window.location.href + "game/pressButton")
@@ -50,7 +54,9 @@ class Game extends Component{
             
     }
 
+
     resetPoints(params) {
+        // when user score is 0 we call this and server resets our score and gives 
         fetch(window.location.href + "game/resetPoints")
             .then(response => response.json())
             .then(data => {
@@ -65,7 +71,10 @@ class Game extends Component{
         return(
             <div className="fade-in">
                 <h2 className="bigger-text" style={{color: "White",marginTop: 40}}>Your points: <b>{this.state.points}</b></h2>
+                {/* here we check for if the points are below 0 and if so we give gameover screen for user */}
                 {this.state.points <= 0 && this.state.points != null && <GameOver resetPoints={this.resetPoints}/>}
+
+                {/* Button conainer and button itself */}
                 <div className="button-container">
                     {this.state.buttonStatus === "up" ? 
                     <div> 

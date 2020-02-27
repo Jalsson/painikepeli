@@ -1,1 +1,1 @@
-[{"key":"By7UfIUfUfo7Yh47","points":23},{"key":"qGFvrMLcGriu41","points":9},{"key":"iuZDYjIKIK5TXW17","points":14}]
+[{"key":"By7UfIUfUfo7Yh47","points":10},{"key":"qGFvrMLcGriu41","points":9},{"key":"iuZDYjIKIK5TXW17","points":13},{"key":"Hqo7gMkSkSmPis53","points":5},{"key":"is1KZEqGCbno15","points":14},{"key":"8kFyOxFyOcOcerZD7UmPZECbCbOx09","points":18}]

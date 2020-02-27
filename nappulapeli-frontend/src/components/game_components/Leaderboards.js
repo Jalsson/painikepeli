@@ -17,6 +17,8 @@ class LeaderBoards extends Component{
         fetch(window.location.href + "game/leaderboard")
             .then(response => response.json())
             .then(data => {
+                // we create temp array before we set state, we get every item from data and loop thourgh it
+                // and it inside our own array so we can manipulate the data and arrange it by score
                 let tempArray = []
                 for (let i = 0; i < data.users.length; i++) {
                     tempArray.push(new Player(data.users[i].key,data.users[i].points))
@@ -32,6 +34,7 @@ class LeaderBoards extends Component{
     }
 
     render() {
+        // we put all the array elements inside a list
         const listItems = this.state.players.map((d) => <li key={d.key}>{d.key} {d.score}p</li>);    
         return(
             <div className="fade-in">

@@ -1,3 +1,4 @@
+// User object needed to save all users inside array
 class User {
     constructor(key, points) {
       this.key = key;

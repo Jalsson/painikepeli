@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function GameOver(props) {
     
@@ -7,6 +7,7 @@ function GameOver(props) {
                 <div className="welcome-content-body lose-game-body">
                     <h1>You have lost</h1>
                     <h2>But don't worry, by clicking button below you can reset your score to 20 and start again!</h2>
+                    {/* when user presses okay we call game components resetPoints that starts the game again */}
                     <button className="nameInputButton" style={{fontSize:"150%"}} onClick={() => props.resetPoints()} > Reset score</button>
                 </div>
             </div>

@@ -24,6 +24,7 @@ class GameScreen extends Component{
             })
     }
 
+    //setting page state, this state changed what page is rendered under this component
     setPage(page) {
         this.setState({
             renderedPage: page
@@ -48,6 +49,7 @@ class GameScreen extends Component{
                     className={this.state.renderedPage === "howTo" ? selectedButton: unSelectedButton} 
                     onClick={() => this.setPage("howTo")}> <h2>How to play</h2> </div>
                 </div>
+                {/* Alter the rendered page acording to what is set to rendered page */}
                 {this.state.renderedPage === "game" && <Game/>}{this.state.renderedPage === "leaderboard" && <Leaderboards/>} {this.state.renderedPage === "howTo" && <div className="game-screen-div"><GameInfo/></div>}
             </div>
         )

@@ -8,7 +8,7 @@ class WelcomeScreen extends Component {
         super()
         this.state = {
             renderedPage: 'nameInput',
-            askWelcome: ""
+            askWelcome: false
         }
         this.setPage = this.setPage.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -20,14 +20,18 @@ class WelcomeScreen extends Component {
         })
     }
 
+    // changes the states of given value
     handleChange(event) {
         const { name, value, type, checked } = event.target;
         type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
     }
 
     render() {
+        //setting classes of selected and unselected buttons
         let selectedButton ='col sub-menu-button selected-clor'
         let unSelectedButton = 'col sub-menu-button unselected-clor'
+
+        // if name is not null we render welcome page otherwise we ask for user to input username
         if (this.props.userName != null) {
         return (
             <div className="welcome-content-body">
@@ -54,6 +58,8 @@ class WelcomeScreen extends Component {
         else{
             return(
                 <div className="welcome-content-body">
+                    
+                    {/** here are the two buttons that alter the contnent */}
                 <div className="row">
                     <div
                     className={this.state.renderedPage === "nameInput" ? selectedButton: unSelectedButton} 
@@ -64,6 +70,8 @@ class WelcomeScreen extends Component {
                     className={this.state.renderedPage === "nameInput" ? unSelectedButton: selectedButton} 
                     onClick={() => this.setPage('info')}> <h2>How to play</h2> </div>
                 </div>
+
+                {/*if either buttons are pressed we render correct page using class state and give them the statehandler that they can change Main.js state*/}
                 {this.state.renderedPage === "nameInput" ? <NameInput stateHandler={this.props.stateHandler}/>: <div> <GameInfo/> <h2>Happy scoring ;)</h2> </div>}
                 </div> 
             )

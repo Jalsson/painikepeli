@@ -6,7 +6,8 @@ class NameInput extends Component {
         super()
         this.state = {
             userName: '',
-            warning: ''
+            warning: '',
+            cookies: false
         }
         this.sendUserName = this.sendUserName.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -14,6 +15,14 @@ class NameInput extends Component {
 
 
     sendUserName() {
+        //post username to server
+
+        if (!this.state.cookies) {
+            this.setState({
+                warning: "You need to accept cookies before you can use the site :("
+            })
+            return;
+        }
         fetch(window.location.href + "authentication/username", {
             method: 'POST',
             headers: {
@@ -23,7 +32,7 @@ class NameInput extends Component {
             body: JSON.stringify({
                 userName: this.state.userName
             })
-        })
+        })  // get response and give user correct message according what server responded
             .then(response => response.json())
             .then(data => {
                 if (data.status === "failure") {
@@ -39,9 +48,10 @@ class NameInput extends Component {
             })
     }
 
+    // change name state when input is changed
     handleChange(event) {
-        const { name, value } = event.target;
-        this.setState({ [name]: value });
+        const { name, value, type, checked } = event.target;
+        type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value });
     }
 
     render() {
@@ -50,6 +60,15 @@ class NameInput extends Component {
                 {Cookies.get('userID') != null ? <h3>It seems that your cookie is either expired or wrong kind. You have to make new user to enter</h3>: <h2>New user? Please enter your name below</h2>}
                 <input type="text" name="userName" value={this.state.userName} onChange={this.handleChange} placeholder="your name here "></input>
                 <button className="nameInputButton" onClick={this.sendUserName}>Submit</button>
+                <p>We use cookies to improve your experience and keep you logged in.</p>
+                <p><b>I accept use of cookies</b>
+                    <input 
+                    type="checkbox"
+                    name="cookies" 
+                    checked={this.state.cookies} 
+                    onChange={this.handleChange} 
+                    />
+                </p>
                 <p>{this.state.warning}</p>
             </div>
         )

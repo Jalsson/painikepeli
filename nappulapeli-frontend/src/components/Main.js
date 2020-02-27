@@ -19,8 +19,8 @@ class Main extends Component {
         })
     }
 
+    // here we fetch the username and render gamescreen if username is setted
     componentDidMount() {
-        console.log(window.location.origin);
         fetch(window.location.href + "authentication")
             .then(response => response.json())
             .then(data => {
@@ -32,6 +32,7 @@ class Main extends Component {
 
     render() {
 
+        // if no welcome cookie is setted we dont want to show welcome screen at all to user and take client straight to the game screen
         if( (this.state.page === "game" || Cookies.get('noWelcome') === "false") && this.state.userName !== null){
             return <GameScreen />
         }
