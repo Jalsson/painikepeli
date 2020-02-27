@@ -64,7 +64,7 @@ class WelcomeScreen extends Component {
                     className={this.state.renderedPage === "nameInput" ? unSelectedButton: selectedButton} 
                     onClick={() => this.setPage('info')}> <h2>How to play</h2> </div>
                 </div>
-                {this.state.renderedPage === "nameInput" ? <NameInput stateHandler={this.props.stateHandler}/>: <div><h1>Button game</h1> <GameInfo/> <h2>Happy scoring ;)</h2> </div>}
+                {this.state.renderedPage === "nameInput" ? <NameInput stateHandler={this.props.stateHandler}/>: <div> <GameInfo/> <h2>Happy scoring ;)</h2> </div>}
                 </div> 
             )
         }

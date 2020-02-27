@@ -34,7 +34,7 @@ class NameInput extends Component {
                    this.props.stateHandler("userName",this.state.userName)
                 }
                 else if (data.status === "wrongCharacters") {
-                    this.setState({warning: "Some of the character in your name were now allowed. Please enter only letters."})
+                    this.setState({warning: "You entered too long name(15 characters) or some of the character in your name were now allowed. Please enter only letters."})
                 }
             })
     }

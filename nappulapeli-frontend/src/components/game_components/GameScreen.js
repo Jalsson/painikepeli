@@ -48,7 +48,7 @@ class GameScreen extends Component{
                     className={this.state.renderedPage === "howTo" ? selectedButton: unSelectedButton} 
                     onClick={() => this.setPage("howTo")}> <h2>How to play</h2> </div>
                 </div>
-                {this.state.renderedPage === "game" && <Game/>}{this.state.renderedPage === "leaderboard" && <Leaderboards/>} {this.state.renderedPage === "howTo" && <GameInfo></GameInfo>}
+                {this.state.renderedPage === "game" && <Game/>}{this.state.renderedPage === "leaderboard" && <Leaderboards/>} {this.state.renderedPage === "howTo" && <div className="game-screen-div"><GameInfo/></div>}
             </div>
         )
     }

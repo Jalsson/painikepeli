@@ -25,6 +25,11 @@ min-height: 400px;
   font-size: 250%;
 }
 
+.game-screen-div{
+  max-width: 60%;
+  margin: auto;
+}
+
 .centered-text{
   position: absolute;
   top:40%;
@@ -160,6 +165,9 @@ cursor:pointer;
   }
   [class*="info-margin"] {
     margin-top: 5px;
+  }
+  [class*="game-screen-div"] {
+    max-width: 100%;
   }
   [class*="unselected-clor"] {
     box-shadow: 1px 5px rgb(8, 8, 8);
