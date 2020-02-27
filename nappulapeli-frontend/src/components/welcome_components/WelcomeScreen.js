@@ -58,7 +58,7 @@ class WelcomeScreen extends Component {
                     <div
                     className={this.state.renderedPage === "nameInput" ? selectedButton: unSelectedButton} 
                     onClick={() => this.setPage('nameInput')}>
-                        <h2>Registeration</h2>
+                        <h2>Registration</h2>
                     </div>
                     <div id="info" 
                     className={this.state.renderedPage === "nameInput" ? unSelectedButton: selectedButton} 
