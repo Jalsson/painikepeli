@@ -19,6 +19,9 @@ Guide about how to play can be found from the site
  - **React**
     - With React I used a lot of conditional rendering to reuse components and structure the app to small components
     - This was the first time I used React and benefits are immediately apparent when looking at ease of deploying compared to a traditional site with plain JS, HTML, CSS
+- **Express.js**
+  - The backend was made with Node.js component Express.js this was a powerful tool that I have used before in my earlier Node.js project
+  - Node.js allows to add big new functionalities with very little effort and that's why it was an ideal choice for the backend
 
 
 
