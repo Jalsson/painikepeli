@@ -50,7 +50,7 @@ class Game extends Component{
                     countToNext: data.countToNext
                 })
             })
-        }, 250)
+        }, 300)
             
     }
 
